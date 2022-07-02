@@ -65,9 +65,28 @@ class FreelancerController{
 
       if(!existEmail) return await response.json({"Mensagem": "Usuário Inválido", error: true})
 
-      if(existEmail.password !== password)  return await response.json({"Mensagem": "As passawords não conferem", error: true})
+      if(existEmail.password !== password)  return await response.json({"Mensagem": "As passwords não conferem", error: true})
       await response.json({"Mensagem": "Login Efectuado", error: false})
      }
+   
+
+     async update(require, response) {
+      try{
+        const { id } = require.body;
+
+        if(!id) return response.status(400).json({"Mensagem": "Id não pode ser inválido"})
+
+        const user = await freelancer.findByPk(id);
+        if(!user) return response.status(400).json({"Mensagem": "Usuario não encontrado"});
+
+        const { novasActualizacoes } = require.body;
+        const newUser = await freelancer.update(novasActualizacoes)
+      }catch(error){
+        const erro = e.error.map((err) => {
+          err.message;
+        })
+      }
+   }
 }
 
 export default new FreelancerController();

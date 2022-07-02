@@ -1,6 +1,6 @@
 
 import express from 'express'
-import routes from './src/routes/homeRoutes.js'
+import routes from './src/routes/Routes.js'
 import Sequelize from  'sequelize'
 import conect from './conect.js'
 import cors from 'cors';
