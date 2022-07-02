@@ -2,31 +2,34 @@ import conect from '../../conect.js'
 import Sequelize from 'sequelize'
 
 
-const Freelancer_Free = conect.define("Freelancer_Free", {
+const Localizacao = conect.define("Localizacao", {
    id:{
          type:Sequelize.INTEGER,
          primaryKey: true,
          allowNull: false, 
          autoIncrement: true
     },
-    Nome: {
+    Pais: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    Genero: {
+    Provincia: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    Email: {
+   Municipio: {
         type: Sequelize.STRING,
         allowNull: false
-    }, 
-    id_FreelancerFree: {
-        type: Sequelize.INTEGER,
+    },
+   Municipio: {
+        type: Sequelize.DATE,
         allowNull: false
-    }  
+    },
+   Numero_Casa: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
+    
 })
 
-//Freelancer_Free.sync({force: true})
-//export default router;
-export default Freelancer_Free;
+//Localizacao.sync({force: true})

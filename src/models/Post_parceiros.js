@@ -2,7 +2,7 @@ import conect from '../../conect.js'
 import Sequelize from 'sequelize'
 
 
-const HabilidadesFreelancer = conect.define("HabilidadesFreelancer", {
+const Post_Parceiros = conect.define("Post_Parceiros", {
    idPost:{
          type:Sequelize.INTEGER,
          primaryKey: true,
@@ -13,7 +13,7 @@ const HabilidadesFreelancer = conect.define("HabilidadesFreelancer", {
         type: Sequelize.STRING,
         allowNull: false,
     },
-   id_freelancer: {
+   id_Parceiro: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
@@ -24,4 +24,4 @@ const HabilidadesFreelancer = conect.define("HabilidadesFreelancer", {
     
 })
 
-//HabilidadesFreelancer.sync({force: true})
+//Post_Parceiros.sync({force: true})
