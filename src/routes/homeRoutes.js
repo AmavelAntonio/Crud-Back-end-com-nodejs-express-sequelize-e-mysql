@@ -8,6 +8,7 @@ router.post('/CadastroFreelancer', homeController.index)
 router.post("/cadastro-Admin", Admin.index)
 router.get("/login-Admin", Admin.login)
 router.get("/login-freelancer", homeController.login)
+router.delete("delete-freelancer", Admin.delete)
 
 
 export default router;
