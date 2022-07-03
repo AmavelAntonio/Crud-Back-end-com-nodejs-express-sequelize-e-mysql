@@ -1,4 +1,3 @@
-
 import express from 'express'
 import routes from './src/routes/Routes.js'
 import Sequelize from  'sequelize'

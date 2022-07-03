@@ -1,14 +1,23 @@
 import { Router } from "express";
-import homeController from '../controllers/FreelancerController.js'
+import freelancer from '../controllers/FreelancerController.js'
 import Admin from "../controllers/AdminController.js"
 
 const router = new Router();
 
-router.post('/CadastroFreelancer', homeController.index)
-router.post("/cadastro-Admin", Admin.index)
-router.get("/login-Admin", Admin.login)
-router.get("/login-freelancer", homeController.login)
+//Rotas Administrador
+router.post("/cadastro-Admin", Admin.store)
+router.get("/login-Admin", Admin.index)
 router.delete("delete-freelancer", Admin.delete)
+
+
+//Rotas para Freelancers
+router.post('/CadastroFreelancer', freelancer.store)
+router.get("/login-freelancer", freelancer.index)
+router.put("/update-freelancer", freelancer.update)
+
+
+//Routas para Empresas ou parceiros 
+
 
 
 export default router;

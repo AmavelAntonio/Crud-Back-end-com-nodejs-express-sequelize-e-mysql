@@ -3,7 +3,7 @@ import conect from "../../conect.js"
 
 
 class FreelancerController{ 
-    async index(require, response){
+    async store(require, response){
          
        let {nome, Genero, Nascimento, habilidades = -1, contacto, email, password, confirmPassword} = require.body;
 
@@ -30,8 +30,6 @@ class FreelancerController{
           }
         })
         
-        
-
        if(existUser) return response.json({"Mensagem": "Já exite um freelancer com este email, tente outro"})
 
         const newFreelancer = await freelancer.create({
@@ -49,24 +47,31 @@ class FreelancerController{
 
       }
 
-     async login(require, response){
+     async index(require, response){
+          try{ 
+            const {email, password} = require.body;
 
-      const {email, password} = require.body;
+            if(!email) return await response.json({"Mensgaem": "Email não pode ser inválido", error: true})
 
-      if(!email) return await response.json({"Mensgaem": "Email não pode ser inválido", error: true})
+            if(!password) return await response.json({"Mensagem": "A password não pode ser inválida", error: true})
 
-      if(!password) return await response.json({"Mensagem": "A password não pode ser inválida", error: true})
+            const existEmail = await freelancer.findOne({
+              where: {
+                Email: email
+              }
+            })
 
-      const existEmail = await freelancer.findOne({
-        where: {
-          Email: email
+            if(!existEmail) return await response.json({"Mensagem": "Usuário Inválido", error: true})
+
+            if(existEmail.password !== password)  return await response.json({"Mensagem": "As passwords não conferem", error: true})
+            await response.json({"Mensagem": "Login Efectuado", error: false})
+        } catch(error){
+          const err = error.map((err) => {
+              return err.message;
+          })
+
+          console.log(err)
         }
-      })
-
-      if(!existEmail) return await response.json({"Mensagem": "Usuário Inválido", error: true})
-
-      if(existEmail.password !== password)  return await response.json({"Mensagem": "As passwords não conferem", error: true})
-      await response.json({"Mensagem": "Login Efectuado", error: false})
      }
    
 
@@ -82,9 +87,11 @@ class FreelancerController{
         const { novasActualizacoes } = require.body;
         const newUser = await freelancer.update(novasActualizacoes)
       }catch(error){
-        const erro = e.error.map((err) => {
-          err.message;
+        const erro = error.map((err) => {
+          return err.message;
         })
+
+        console.log(erro)
       }
    }
 }
